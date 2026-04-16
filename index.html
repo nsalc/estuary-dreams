@@ -22,7 +22,7 @@
       height: 100vh;
     }
 
-    #ed-wrapper img {
+    #ed-wrapper img.layer {
       position: absolute;
       top: 0;
       left: 0;
@@ -32,20 +32,193 @@
       object-position: center;
     }
 
-    #ed-bg    { z-index: 1; }
-    #ed-frame { z-index: 2; }
-    #ed-title { z-index: 3; mix-blend-mode: screen; }
-    #ed-menu  { z-index: 4; mix-blend-mode: screen; }
+    #ed-bg {
+      z-index: 1;
+      object-fit: cover;
+    }
+
+    #ed-frame {
+      z-index: 2;
+    }
+
+    #ed-title {
+      z-index: 5;
+      mix-blend-mode: screen;
+    }
+
+    #ed-menu {
+      z-index: 5;
+      mix-blend-mode: screen;
+    }
+
+    /* ── NAV HOTSPOTS ── */
+    #ed-nav {
+      position: absolute;
+      z-index: 6;
+      top: 17%;
+      left: 26%;
+      display: flex;
+      gap: 3.5vw;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+      color: transparent;
+      padding: 0.5em 0.8em;
+      /* outline: 2px dashed red; */
+    }
+
+    .nav-btn:hover  { background: rgba(255,255,255,0.1); border-radius: 4px; }
+    .nav-btn.active { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+    /* ── CONTENT BOX ── */
+    #ed-content {
+      position: absolute;
+      z-index: 3;
+      top: 37%;
+      left: 34%;
+      width: 36%;
+      height: 38%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.3) transparent;
+      transition: opacity 0.3s ease;
+    }
+
+    #ed-content::-webkit-scrollbar { width: 4px; }
+    #ed-content::-webkit-scrollbar-track { background: transparent; }
+    #ed-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
+    #ed-content.fading { opacity: 0; }
+
+    /* ── SECTIONS ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── PHOTO GRID ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 4px;
+    }
+
+    .photo-item img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 3px;
+      display: block;
+    }
+
+    .photo-item p {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      color: rgba(255,255,255,0.9);
+      margin-top: 5px;
+      line-height: 1.4;
+      font-family: Georgia, serif;
+    }
+
+    .placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.15);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
+      font-family: Georgia, serif;
+    }
   </style>
 </head>
 <body>
 
-  <div id="ed-wrapper">
-    <img id="ed-bg"    src="assets/background.jpg" alt="" />
-    <img id="ed-frame" src="assets/nav-frame.png"  alt="" />
-    <img id="ed-title" src="assets/title.png"      alt="Estuary Dreams" />
-    <img id="ed-menu"  src="assets/menu.png"       alt="" />
+<div id="ed-wrapper">
+
+  <img id="ed-bg"    class="layer" src="assets/background.jpg" alt="" />
+  <img id="ed-frame" class="layer" src="assets/nav-frame.png"  alt="" />
+
+  <div id="ed-content">
+
+    <section id="section-home" class="section active">
+      <div class="photo-grid">
+        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
+        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
+        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
+        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
+      </div>
+    </section>
+
+    <section id="section-art" class="section">
+      <div class="photo-grid">
+        <div class="photo-item"><div class="placeholder">art 1</div><p>Artwork title</p></div>
+        <div class="photo-item"><div class="placeholder">art 2</div><p>Artwork title</p></div>
+        <div class="photo-item"><div class="placeholder">art 3</div><p>Artwork title</p></div>
+        <div class="photo-item"><div class="placeholder">art 4</div><p>Artwork title</p></div>
+      </div>
+    </section>
+
+    <section id="section-shop" class="section">
+      <div class="photo-grid">
+        <div class="photo-item"><div class="placeholder">item 1</div><p>Item + price</p></div>
+        <div class="photo-item"><div class="placeholder">item 2</div><p>Item + price</p></div>
+        <div class="photo-item"><div class="placeholder">item 3</div><p>Item + price</p></div>
+        <div class="photo-item"><div class="placeholder">item 4</div><p>Item + price</p></div>
+      </div>
+    </section>
+
+    <section id="section-blog" class="section">
+      <div class="photo-grid">
+        <div class="photo-item"><div class="placeholder">post 1</div><p>Post title + date</p></div>
+        <div class="photo-item"><div class="placeholder">post 2</div><p>Post title + date</p></div>
+      </div>
+    </section>
+
+    <section id="section-about" class="section">
+      <div class="photo-grid">
+        <div class="photo-item"><div class="placeholder">photo</div><p>Bio text here</p></div>
+      </div>
+    </section>
+
   </div>
+
+  <nav id="ed-nav">
+    <button class="nav-btn active" data-section="home">HOME</button>
+    <button class="nav-btn"        data-section="art">ART</button>
+    <button class="nav-btn"        data-section="shop">SHOP</button>
+    <button class="nav-btn"        data-section="blog">BLOG</button>
+    <button class="nav-btn"        data-section="about">ABOUT</button>
+  </nav>
+
+  <img id="ed-title" class="layer" src="assets/title.png" alt="Estuary Dreams" />
+  <img id="ed-menu"  class="layer" src="assets/menu.png"  alt="" />
+
+</div>
+
+<script>
+  const buttons  = document.querySelectorAll('.nav-btn');
+  const content  = document.getElementById('ed-content');
+  const sections = document.querySelectorAll('.section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      content.classList.add('fading');
+      setTimeout(() => {
+        sections.forEach(s => s.classList.remove('active'));
+        document.getElementById('section-' + btn.dataset.section).classList.add('active');
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        content.scrollTop = 0;
+        content.classList.remove('fading');
+      }, 300);
+    });
+  });
+</script>
 
 </body>
 </html>
