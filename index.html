@@ -8,7 +8,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #000;
+      background: #6abfb8;
       overflow: hidden;
       width: 100vw;
       height: 100vh;
@@ -22,34 +22,30 @@
       height: 100vh;
     }
 
-    #ed-wrapper img.layer {
+    /* Background fills the entire screen, cropping if needed */
+    #ed-bg {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+    }
+
+    /* Frame, title, menu scale to fit without cropping */
+    #ed-frame, #ed-title, #ed-menu {
+      position: absolute;
+      top: 0; left: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
       object-position: center;
     }
 
-    #ed-bg {
-      z-index: 1;
-      object-fit: cover;
-    }
-
-    #ed-frame {
-      z-index: 2;
-    }
-
-    #ed-title {
-      z-index: 5;
-      mix-blend-mode: screen;
-    }
-
-    #ed-menu {
-      z-index: 5;
-      mix-blend-mode: screen;
-    }
+    #ed-frame { z-index: 2; }
+    #ed-title { z-index: 5; mix-blend-mode: screen; }
+    #ed-menu  { z-index: 5; mix-blend-mode: screen; }
 
     /* ── NAV HOTSPOTS ── */
     #ed-nav {
@@ -94,11 +90,9 @@
     #ed-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
     #ed-content.fading { opacity: 0; }
 
-    /* ── SECTIONS ── */
     .section { display: none; }
     .section.active { display: block; }
 
-    /* ── PHOTO GRID ── */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -140,11 +134,10 @@
 
 <div id="ed-wrapper">
 
-  <img id="ed-bg"    class="layer" src="assets/background.jpg" alt="" />
-  <img id="ed-frame" class="layer" src="assets/nav-frame.png"  alt="" />
+  <img id="ed-bg"    src="assets/background.jpg" alt="" />
+  <img id="ed-frame" src="assets/nav-frame.png"  alt="" />
 
   <div id="ed-content">
-
     <section id="section-home" class="section active">
       <div class="photo-grid">
         <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
@@ -153,7 +146,6 @@
         <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
       </div>
     </section>
-
     <section id="section-art" class="section">
       <div class="photo-grid">
         <div class="photo-item"><div class="placeholder">art 1</div><p>Artwork title</p></div>
@@ -162,7 +154,6 @@
         <div class="photo-item"><div class="placeholder">art 4</div><p>Artwork title</p></div>
       </div>
     </section>
-
     <section id="section-shop" class="section">
       <div class="photo-grid">
         <div class="photo-item"><div class="placeholder">item 1</div><p>Item + price</p></div>
@@ -171,20 +162,17 @@
         <div class="photo-item"><div class="placeholder">item 4</div><p>Item + price</p></div>
       </div>
     </section>
-
     <section id="section-blog" class="section">
       <div class="photo-grid">
         <div class="photo-item"><div class="placeholder">post 1</div><p>Post title + date</p></div>
         <div class="photo-item"><div class="placeholder">post 2</div><p>Post title + date</p></div>
       </div>
     </section>
-
     <section id="section-about" class="section">
       <div class="photo-grid">
         <div class="photo-item"><div class="placeholder">photo</div><p>Bio text here</p></div>
       </div>
     </section>
-
   </div>
 
   <nav id="ed-nav">
@@ -195,8 +183,8 @@
     <button class="nav-btn"        data-section="about">ABOUT</button>
   </nav>
 
-  <img id="ed-title" class="layer" src="assets/title.png" alt="Estuary Dreams" />
-  <img id="ed-menu"  class="layer" src="assets/menu.png"  alt="" />
+  <img id="ed-title" src="assets/title.png" alt="Estuary Dreams" />
+  <img id="ed-menu"  src="assets/menu.png"  alt="" />
 
 </div>
 
