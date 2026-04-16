@@ -16,29 +16,24 @@
 
     #ed-wrapper {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
     }
 
-    /* Background fills the entire screen, cropping if needed */
     #ed-bg {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       object-position: center;
       z-index: 1;
     }
 
-    /* Frame, title, menu scale to fit without cropping */
     #ed-frame, #ed-title, #ed-menu {
       position: absolute;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: contain;
       object-position: center;
     }
@@ -70,14 +65,17 @@
     .nav-btn:hover  { background: rgba(255,255,255,0.1); border-radius: 4px; }
     .nav-btn.active { background: rgba(255,255,255,0.15); border-radius: 4px; }
 
-    /* ── CONTENT BOX ── */
+    /* ── CONTENT BOX ──
+       One single scrollable area inside the frame opening.
+       Adjust top/left/width/height to fit your frame exactly.
+    */
     #ed-content {
       position: absolute;
       z-index: 3;
-      top: 37%;
-      left: 34%;
-      width: 36%;
-      height: 38%;
+      top: 42%;
+      left: 36%;
+      width: 30%;
+      height: 32%;
       overflow-y: auto;
       overflow-x: hidden;
       scrollbar-width: thin;
@@ -90,42 +88,43 @@
     #ed-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 2px; }
     #ed-content.fading { opacity: 0; }
 
+    /* ── SECTIONS ── */
     .section { display: none; }
     .section.active { display: block; }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 4px;
+    /* ── CONTENT ITEMS ──
+       Each item is a photo with caption below.
+       Items stack vertically and you scroll through them.
+    */
+    .item {
+      margin-bottom: 1.2rem;
     }
 
-    .photo-item img {
+    .item img {
       width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      border-radius: 3px;
+      border-radius: 4px;
       display: block;
     }
 
-    .photo-item p {
-      font-size: clamp(0.7rem, 1vw, 0.85rem);
+    .item p {
+      font-size: clamp(0.7rem, 1vw, 0.9rem);
       color: rgba(255,255,255,0.9);
-      margin-top: 5px;
-      line-height: 1.4;
+      margin-top: 6px;
+      line-height: 1.5;
       font-family: Georgia, serif;
     }
 
-    .placeholder {
+    /* Placeholder shown before real photos are added */
+    .item-placeholder {
       width: 100%;
       aspect-ratio: 4/3;
-      background: rgba(255,255,255,0.15);
-      border-radius: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.7rem;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.3);
       font-family: Georgia, serif;
     }
   </style>
@@ -137,44 +136,44 @@
   <img id="ed-bg"    src="assets/background.jpg" alt="" />
   <img id="ed-frame" src="assets/nav-frame.png"  alt="" />
 
+  <!-- Single scrollable content box -->
   <div id="ed-content">
+
+    <!-- HOME -->
     <section id="section-home" class="section active">
-      <div class="photo-grid">
-        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
-        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
-        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
-        <div class="photo-item"><div class="placeholder">photo</div><p>Caption here</p></div>
-      </div>
+      <div class="item"><div class="item-placeholder">photo</div><p>Caption here</p></div>
+      <div class="item"><div class="item-placeholder">photo</div><p>Caption here</p></div>
+      <div class="item"><div class="item-placeholder">photo</div><p>Caption here</p></div>
     </section>
+
+    <!-- ART -->
     <section id="section-art" class="section">
-      <div class="photo-grid">
-        <div class="photo-item"><div class="placeholder">art 1</div><p>Artwork title</p></div>
-        <div class="photo-item"><div class="placeholder">art 2</div><p>Artwork title</p></div>
-        <div class="photo-item"><div class="placeholder">art 3</div><p>Artwork title</p></div>
-        <div class="photo-item"><div class="placeholder">art 4</div><p>Artwork title</p></div>
-      </div>
+      <div class="item"><div class="item-placeholder">artwork</div><p>Title and description</p></div>
+      <div class="item"><div class="item-placeholder">artwork</div><p>Title and description</p></div>
+      <div class="item"><div class="item-placeholder">artwork</div><p>Title and description</p></div>
     </section>
+
+    <!-- SHOP -->
     <section id="section-shop" class="section">
-      <div class="photo-grid">
-        <div class="photo-item"><div class="placeholder">item 1</div><p>Item + price</p></div>
-        <div class="photo-item"><div class="placeholder">item 2</div><p>Item + price</p></div>
-        <div class="photo-item"><div class="placeholder">item 3</div><p>Item + price</p></div>
-        <div class="photo-item"><div class="placeholder">item 4</div><p>Item + price</p></div>
-      </div>
+      <div class="item"><div class="item-placeholder">item</div><p>Name · $00</p></div>
+      <div class="item"><div class="item-placeholder">item</div><p>Name · $00</p></div>
+      <div class="item"><div class="item-placeholder">item</div><p>Name · $00</p></div>
     </section>
+
+    <!-- BLOG -->
     <section id="section-blog" class="section">
-      <div class="photo-grid">
-        <div class="photo-item"><div class="placeholder">post 1</div><p>Post title + date</p></div>
-        <div class="photo-item"><div class="placeholder">post 2</div><p>Post title + date</p></div>
-      </div>
+      <div class="item"><div class="item-placeholder">post image</div><p>Post title — date</p></div>
+      <div class="item"><div class="item-placeholder">post image</div><p>Post title — date</p></div>
     </section>
+
+    <!-- ABOUT -->
     <section id="section-about" class="section">
-      <div class="photo-grid">
-        <div class="photo-item"><div class="placeholder">photo</div><p>Bio text here</p></div>
-      </div>
+      <div class="item"><div class="item-placeholder">photo</div><p>Your bio goes here</p></div>
     </section>
+
   </div>
 
+  <!-- Invisible nav hotspots -->
   <nav id="ed-nav">
     <button class="nav-btn active" data-section="home">HOME</button>
     <button class="nav-btn"        data-section="art">ART</button>
